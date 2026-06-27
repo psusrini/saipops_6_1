@@ -5,6 +5,7 @@
 package com.mycompany.saipops_6_1.utils;
              
 import static com.mycompany.saipops_6_1.Constants.*;
+import static com.mycompany.saipops_6_1.HeuristicEnum.NATIVE_CPLEX;
 import static com.mycompany.saipops_6_1.Parameters.*; 
 import com.mycompany.saipops_6_1.constraints.LowerBoundConstraint;
 import com.mycompany.saipops_6_1.constraints.Triplet;
@@ -37,6 +38,8 @@ public class CplexUtils {
         cplex.setParam( IloCplex.Param.Emphasis.MIP,  MIP_EMPHASIS);
        
         //cplex.setParam( IloCplex.Param.MIP.Strategy.HeuristicFreq , HEUR_FREQ);
+        
+        //cplex.setParam(IloCplex.Param.MIP.Strategy.VariableSelect,  IloCplex.VariableSelect.Strong); 
         
         cplex.setParam( IloCplex.Param.MIP.Strategy.HeuristicEffort , HEUR_EFFORT ); 
          

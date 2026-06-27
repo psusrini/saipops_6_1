@@ -12,6 +12,8 @@ package com.mycompany.saipops_6_1;
  */
 public enum HeuristicEnum {
      
-    POPS  ,    
+    POPS  ,   
+    FRAC,
+   
     NATIVE_CPLEX;    
 }

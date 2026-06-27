@@ -91,7 +91,10 @@ public class BagOfAttributes {
             for (String var : attr.fractionalPrimaryVariables){
                 Double score = this.jwScoreMap_Primary.get (var) ;
                 if (null == score) score = DOUBLE_ZERO;
+                
                 score +=  Math.pow(TWO, - attr.primaryDimension)* attr.constraintSize;
+                //score +=  Math.pow(TWO, - attr.primaryDimension)* attr.allPrimaryVariables.size();  
+                
                 this.jwScoreMap_Primary.put (var, score) ;
             }
            

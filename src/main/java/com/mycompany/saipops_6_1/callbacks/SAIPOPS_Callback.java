@@ -53,8 +53,8 @@ public class SAIPOPS_Callback extends IloCplex.BranchCallback{
             //get fixed and fractional vars
             TreeMap<String, Boolean> fixings = new  TreeMap<String, Boolean>();
             TreeMap<String, Double>  freeVariables = new TreeMap<String, Double>  ();
-            TreeSet <String> fractionalVariables = new TreeSet <String> ();
-            getFreeAndFixedVars (freeVariables, fixings, fractionalVariables) ;
+            TreeMap <String, Double> fractionalvariablesMap = new TreeMap <String, Double> ();
+            getFreeAndFixedVars (freeVariables, fixings, fractionalvariablesMap) ;
             
             //get branching recommendation
             try {                
@@ -70,7 +70,7 @@ public class SAIPOPS_Callback extends IloCplex.BranchCallback{
                         for (LowerBoundConstraint lbc : lbcSet){
 
                             LowerBoundConstraint lbc_LocalCopy = lbc.getCopy();
-                            lbc_LocalCopy= lbc_LocalCopy.applyKnownFixings(fixings, fractionalVariables);
+                            lbc_LocalCopy= lbc_LocalCopy.applyKnownFixings(fixings, fractionalvariablesMap.keySet());
 
                             if (null != lbc_LocalCopy){
 
@@ -83,10 +83,9 @@ public class SAIPOPS_Callback extends IloCplex.BranchCallback{
                         }
                     }
 
-                    IBranchingHeuristic branchingHeuristic  =   
-                             new Sai_POPS_Heuristic(   attributeBag ,   objectiveFunctionMap );
-
+                    IBranchingHeuristic branchingHeuristic  =    new Sai_POPS_Heuristic(   attributeBag ,   objectiveFunctionMap );                     
                     branchingVar = branchingHeuristic .getBranchingVariable();
+                    
                 }
                     
                 overruleCplexBranching (branchingVar) ; 
@@ -112,7 +111,7 @@ public class SAIPOPS_Callback extends IloCplex.BranchCallback{
     private  void getFreeAndFixedVars (  
              TreeMap<String, Double>  freeVariables,
               TreeMap<String, Boolean> fixings,
-              TreeSet <String> fractionalvariables) throws IloException {
+              TreeMap <String, Double> fractionalvariablesMap) throws IloException {
        
         IloNumVar[] allVariables = new  IloNumVar[mapOfAllVariablesInTheModel.size()] ;
         int index =ZERO;
@@ -132,7 +131,7 @@ public class SAIPOPS_Callback extends IloCplex.BranchCallback{
             Double lb = getLB(var) ;
             if (  status[index].equals(IloCplex.IntegerFeasibilityStatus.Infeasible)){
                 freeVariables.put  (var.getName(),varValues[index] ) ;    
-                fractionalvariables.add( var.getName());
+                fractionalvariablesMap.put ( var.getName(),varValues[index]);
             }else if (HALF < Math.abs (lb-ub) ) {
                 freeVariables.put  (var.getName(),varValues[index] ) ;     
                                 

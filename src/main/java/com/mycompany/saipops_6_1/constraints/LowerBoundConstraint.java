@@ -91,7 +91,10 @@ public class LowerBoundConstraint {
     public LowerBoundConstraint getCopy ( ) {
         LowerBoundConstraint twin = new LowerBoundConstraint ( this.lowerBound,this.constraint_Name);
         
-        twin.coefficientList .addAll(this.coefficientList);
+        for (Triplet thisTriplet: this.coefficientList){
+            twin.coefficientList .add (thisTriplet.getCopy() );
+        }
+               
         twin.maxLHS = this.maxLHS;
        
         return twin;
@@ -222,12 +225,14 @@ public class LowerBoundConstraint {
         
     }
       
-    public LowerBoundConstraint applyKnownFixings (TreeMap<String, Boolean> fixings, TreeSet<String> fractionalVariables) {
+    public LowerBoundConstraint applyKnownFixings (TreeMap<String, Boolean> fixings, Set<String> fractionalVariables) {
         this.applyFixings(fixings,fractionalVariables);      
         return this.coefficientList.size () < TWO ?  null: this;
     }
     
-    private void applyFixings  (TreeMap<String, Boolean> fixings, TreeSet<String> fractionalVariables ) {
+    private void applyFixings  (TreeMap<String, Boolean> fixings, Set<String> fractionalVariables ) {
+        
+        
         
         List <Triplet> updated_coefficientList  =   new   ArrayList <Triplet>  ();   
         
@@ -238,6 +243,7 @@ public class LowerBoundConstraint {
             
             if (fractionalVariables.contains(triplet.varName)){
                 triplet.isFractional = true;
+                             
             } 
             
             if (null!=fixedValue){

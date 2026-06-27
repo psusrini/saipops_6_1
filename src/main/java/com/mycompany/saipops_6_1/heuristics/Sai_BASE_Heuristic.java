@@ -27,11 +27,14 @@ public abstract  class Sai_BASE_Heuristic  implements IBranchingHeuristic {
      
     protected  TreeMap<String, Double>  objectiveFunctionMap;
     protected  BagOfAttributes  attributeBag;
-          
-    public Sai_BASE_Heuristic (  BagOfAttributes  attributeBag, TreeMap<String, Double>  objectiveFunctionMap  ){
+    
+     
+    public Sai_BASE_Heuristic (  BagOfAttributes  attributeBag, TreeMap<String, Double>  objectiveFunctionMap ){
                       
         this. objectiveFunctionMap = objectiveFunctionMap;
         this.  attributeBag= attributeBag;
+        
+        
            
     }//end constructor method
                          
@@ -52,11 +55,11 @@ public abstract  class Sai_BASE_Heuristic  implements IBranchingHeuristic {
         return candidateArray[ PERF_VARIABILITY_RANDOM_GENERATOR.nextInt(candidates.size())];
     }
     
-    protected abstract TreeSet<String> selectPrimaryBranchingVariable(TreeMap<String, Double >  candidates  ) ;
+    protected abstract TreeSet<String> selectPrimaryBranchingVariable(TreeSet<String  >  candidates  ) ;
     
     
-    private TreeMap<String, Double >   getPrimaryBranchingCandidates() {
-        TreeMap<String, Double >  primaryBranchingCandidates_WithFrequency = new TreeMap<String, Double >   ();
+    private TreeSet<String  >   getPrimaryBranchingCandidates() {
+        TreeSet<String  >  primaryBranchingCandidates  = new TreeSet<String  >   ();
         
         int lowestKnownPrimaryDim = this.attributeBag.lowestKnown_Fractional_PrimaryDimension;
         TreeSet<String> directDependents = new TreeSet<String>  ();
@@ -65,12 +68,8 @@ public abstract  class Sai_BASE_Heuristic  implements IBranchingHeuristic {
          
         for (Attributes attr:  attributeBag.fractional_Primary_AttributeSet){
             
-            for (String var: attr.fractionalPrimaryVariables){
-                Double current = primaryBranchingCandidates_WithFrequency.get(var);
-                if (null == current) current = DOUBLE_ZERO;
-                primaryBranchingCandidates_WithFrequency.put(var, current + ONE);
-            }
-                        
+            primaryBranchingCandidates.addAll( attr.fractionalPrimaryVariables);
+                                    
             if (ONE == lowestKnownPrimaryDim){
                 directDependents.addAll( attr.fractionalSecondaryVariables);   
                 if (attr.fractionalPrimaryVariables.size()> ONE) varsThatWillgetUpFixed.addAll( attr.fractionalPrimaryVariables);
@@ -81,18 +80,18 @@ public abstract  class Sai_BASE_Heuristic  implements IBranchingHeuristic {
         
         //find apex vars       
         TreeSet<String>   apex = new TreeSet<String>     ();
-        apex.addAll( primaryBranchingCandidates_WithFrequency.keySet() );
+        apex.addAll( primaryBranchingCandidates  );
         apex.removeAll(directDependents); 
         //apex.removeAll(indirectDependants); 
                
-        if (!apex.isEmpty() && apex.size() < primaryBranchingCandidates_WithFrequency.size()){
-            for (String dep : directDependents)  {
-                primaryBranchingCandidates_WithFrequency.remove(dep);
-            }
+        if (!apex.isEmpty() && apex.size() < primaryBranchingCandidates.size()){
+            primaryBranchingCandidates= apex;
         }
         
-        return primaryBranchingCandidates_WithFrequency;
+        return primaryBranchingCandidates ;
     }
+    
+
     
     /*
     private TreeSet<String> getIndirectDependants ( TreeSet<String> varsThatWillgetUpFixed){

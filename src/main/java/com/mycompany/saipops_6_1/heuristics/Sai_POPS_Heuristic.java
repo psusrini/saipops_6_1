@@ -32,37 +32,18 @@ public    class Sai_POPS_Heuristic  extends Sai_BASE_Heuristic{
     }//end constructor method
 
     @Override
-    protected TreeSet<String> selectPrimaryBranchingVariable(TreeMap<String, Double> candidatesFrequencyMap) {
-        TreeSet<String> winners =   getSecondaryApex (candidatesFrequencyMap.keySet() );
+    protected TreeSet<String> selectPrimaryBranchingVariable(TreeSet<String  > candidates ) {
         
-        //
-        winners = MathUtils.getMaxObjMagn(winners, objectiveFunctionMap);
-        winners = MathUtils.getMaxiMinFrequency(winners,  attributeBag.jwScoreMap_Primary , new TreeMap<String, Double> ()  );
-        
+         
+        TreeSet<String>  winners =   MathUtils.getMaxObjMagn(candidates , objectiveFunctionMap );
+                       
+        winners =  MathUtils.getMaxiMinFrequency(winners,  attributeBag.jwScoreMap_Primary , new TreeMap<String, Double> ()  );
+
+      
         return winners;
     }
+    
+     
+   
  
-    TreeSet<String>    getSecondaryApex (Set<String>  candidates ){
-        TreeSet<String> apex =  new TreeSet<String> ();
-        
-        TreeSet<String> dominated =  new TreeSet<String> ();
-                
-        if (this.attributeBag.lowestKnown_Fractional_SecondaryDimension==ONE){
-            for (Attributes attr: this.attributeBag.fractional_Secondary_AttributeSet){
-                TreeSet<String> secondaryVars =  new TreeSet<String> ();
-                secondaryVars.addAll( attr.fractionalSecondaryVariables);
-                secondaryVars.retainAll( candidates);
-                if (!secondaryVars.isEmpty()) dominated.addAll(attr.fractionalPrimaryVariables );
-            }
-        }
-        
-        apex.addAll(candidates );
-        apex.removeAll(dominated );
-        
-        if ( apex.isEmpty()) {
-            apex.addAll(candidates );
-        }
-        
-        return apex;
-    }
 }

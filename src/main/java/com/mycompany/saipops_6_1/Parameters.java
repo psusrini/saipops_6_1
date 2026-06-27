@@ -47,8 +47,8 @@ public class Parameters {
     public static final int  FILE_STRATEGY= 3;  
     public static final int MAX_THREADS =  System.getProperty("os.name").toLowerCase().contains("win") ? 1 : 32;
         
-    public static final int MAX_PERIODS =10;
-    public static final int PERIOD_DURATION_IN_SECONDS =60*60; //60 minute periods
+    public static final int MAX_PERIODS =10 ;
+    public static final int PERIOD_DURATION_IN_SECONDS =60*60   ; //60 minute periods
      
     public static final HeuristicEnum HEURISTIC_TO_USE = HeuristicEnum.POPS  ;
     public static final Boolean USE_OPTIMISTIC_DIMENSIONING = false ;
@@ -57,13 +57,13 @@ public class Parameters {
             System.getProperty("os.name").toLowerCase().contains("win") ?
      
     //   "c:\\temp\\mips\\2club200v.pre.sav":
- //     "c:\\temp\\mips\\LTL8.pre.sav": 
+   //   "c:\\temp\\mips\\LTL8.pre.sav": 
             
     //        "c:\\temp\\mips\\stein9inf.pre.sav":
             
-   "c:\\temp\\mips\\bab1.pre.sav":
+    // "c:\\temp\\mips\\bab1.pre.sav":
             
-    // "c:\\temp\\mips\\bab2.pre.sav":
+   //  "c:\\temp\\mips\\bab2.pre.sav":
  
             
     //   "c:\\temp\\mips\\bnatt500.pre.sav":
@@ -79,7 +79,7 @@ public class Parameters {
     //    "c:\\temp\\mips\\neos-954925.pre.sav":  
             
     //  "c:\\temp\\mips\\opm2-z10-s4.pre.sav":
-    //   "c:\\temp\\mips\\opm2-z12-s7.pre.sav":        
+    //  "c:\\temp\\mips\\opm2-z12-s7.pre.sav":        
     //  "c:\\temp\\mips\\opm2-z12-s8.pre.sav":   
     //    "c:\\temp\\mips\\opm2-z12-s14.pre.sav":   
             
@@ -108,12 +108,14 @@ public class Parameters {
 //   "c:\\temp\\mips\\sorrell4.pre.sav":
             
   //   "c:\\temp\\mips\\wnq.pre.sav":
+            
+        "c:\\temp\\mips\\ramos3.sav":
                                                     
     //"C:\\temp\\MIPS\\knapsack.lp":    
             
     //"C:\\temp\\MIPS\\bnatt500.pre.sav":   
             
-    // MIPs with no objective such as bnatt500        
+    //"C:\\temp\\MIPS\\stein9inf.pre.sav":   
             
     //Open problems        
      

@@ -5,10 +5,12 @@
 package com.mycompany.saipops_6_1.utils;
    
 import static com.mycompany.saipops_6_1.Constants.*;
+import static java.lang.System.exit;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+
 
 /**
  *
@@ -25,13 +27,29 @@ public class MathUtils {
         
         return sum;
     }
+    
+    public   static    TreeSet<String>  getMaxObjMagn ( Set<String> candidates  ,  TreeMap<String, Double>  objectiveFunctionMap){
+        return getMaxObjMagn (   candidates  ,   objectiveFunctionMap, new  TreeMap<String, Double> ());
+    }
    
-    public static    TreeSet<String>  getMaxObjMagn ( Set<String> candidates  ,  TreeMap<String, Double>  objectiveFunctionMap){
+    public static    TreeSet<String>  getMaxObjMagn ( Set<String> candidates  ,  TreeMap<String, Double>  objectiveFunctionMap, TreeMap <String, Double> fractionalvariablesMap){
         TreeSet<String >  winners = new  TreeSet<String>();
         double bestKnownObjMagn = -ONE;
         
         for (String var : candidates ){
             Double objval =   objectiveFunctionMap.get( var);
+            
+            if (!fractionalvariablesMap.isEmpty()) {
+                
+                
+                
+                if (objval > ZERO){
+                    objval *= (ONE - fractionalvariablesMap.get (var) ) ; 
+                }else {
+                    objval *=   fractionalvariablesMap.get (var)   ; 
+                }
+                                  
+            }
             
             double thisObjMagn = Math.abs ( objval);
             if (thisObjMagn > bestKnownObjMagn){

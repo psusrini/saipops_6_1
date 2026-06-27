@@ -32,6 +32,16 @@ public class Triplet implements Comparable<Triplet >  {
         
     }    
     
+    public Triplet getCopy () {
+        Triplet twin = new Triplet (this.varName,  this.constraintCoefficient,   this.objectiveCoeffcient);
+        
+        twin.significance = this.significance;
+        
+        //isFractional should be left at false and will be marked dynamically
+        
+        return twin;
+    }
+    
     public int compareTo(Triplet another) {    
         int result = ZERO;
         double val =  Math.abs (another.constraintCoefficient) -  Math.abs(this.constraintCoefficient) ;
