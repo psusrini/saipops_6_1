@@ -92,8 +92,8 @@ public class BagOfAttributes {
                 Double score = this.jwScoreMap_Primary.get (var) ;
                 if (null == score) score = DOUBLE_ZERO;
                 
-                score +=  Math.pow(TWO, - attr.primaryDimension)* attr.constraintSize;
-                //score +=  Math.pow(TWO, - attr.primaryDimension)* attr.allPrimaryVariables.size();  
+                //score +=  Math.pow(TWO, - attr.primaryDimension)* attr.constraintSize;
+                score +=  Math.pow(TWO, - attr.primaryDimension)* (attr.allPrimaryVariables.size() - ONE);  
                 
                 this.jwScoreMap_Primary.put (var, score) ;
             }
