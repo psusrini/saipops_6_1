@@ -46,7 +46,7 @@ public class SaiPOPS_6_1 {
         
         printParameters();
         
-        System.out.println("Version: SaiPOPS_6_1 Gold") ;
+        System.out.println("Version: SaiPOPS_6_1 GoldE") ;
         
         Solver solver = new Solver ( ) ;
         

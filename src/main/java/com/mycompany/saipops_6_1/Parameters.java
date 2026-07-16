@@ -40,7 +40,7 @@ public class Parameters {
         
     }
     
-    public static final int  MIP_EMPHASIS =   3 ;
+    public static final int  MIP_EMPHASIS =   2 ;
     
     //cplex config related
     public static final int  HEUR_EFFORT  = 0 ;    
@@ -48,7 +48,7 @@ public class Parameters {
     public static final int MAX_THREADS =  System.getProperty("os.name").toLowerCase().contains("win") ? 1 : 32;
         
     public static final int MAX_PERIODS =10 ;
-    public static final int PERIOD_DURATION_IN_SECONDS =60*60   ; //60 minute periods
+    public static final int PERIOD_DURATION_IN_SECONDS =60*60    ; //60 minute periods
      
     public static final HeuristicEnum HEURISTIC_TO_USE = HeuristicEnum.POPS  ;
     public static final Boolean USE_OPTIMISTIC_DIMENSIONING = false ;
@@ -61,7 +61,7 @@ public class Parameters {
             
     //        "c:\\temp\\mips\\stein9inf.pre.sav":
             
-    // "c:\\temp\\mips\\bab1.pre.sav":
+   //  "c:\\temp\\mips\\bab1.pre.sav":
             
    //  "c:\\temp\\mips\\bab2.pre.sav":
  
@@ -107,9 +107,9 @@ public class Parameters {
             
 //   "c:\\temp\\mips\\sorrell4.pre.sav":
             
-  //   "c:\\temp\\mips\\wnq.pre.sav":
+     "c:\\temp\\mips\\wnq.pre.sav":
             
-        "c:\\temp\\mips\\ramos3.sav":
+    //    "c:\\temp\\mips\\ramos3.sav":
                                                     
     //"C:\\temp\\MIPS\\knapsack.lp":    
             
@@ -123,7 +123,7 @@ public class Parameters {
     
            
     //for perf variability testing  
-    public static final long PERF_VARIABILITY_RANDOM_SEED = 0;
+    public static final long PERF_VARIABILITY_RANDOM_SEED = 0  ;
     public static final java.util.Random  PERF_VARIABILITY_RANDOM_GENERATOR =             
             new  java.util.Random  (PERF_VARIABILITY_RANDOM_SEED);   
     
